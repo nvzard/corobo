@@ -32,7 +32,7 @@ class TestGitStats(unittest.TestCase):
         self.plugin.__bases__ = (BotPlugin, )
 
     def test_pr_list(self):
-        git_stats, testbot = plugin_testbot(self.plugin, logging.ERROR)
+        git_stats, testbot = plugin_testbot(self.plugin, 'git_stats', logging.ERROR)
         git_stats.activate()
 
         git_stats.REPOS = {'test': self.mock_repo}

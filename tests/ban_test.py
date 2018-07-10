@@ -12,7 +12,7 @@ class TestBan(unittest.TestCase):
     @patch('plugins.ban.requests')
     @patch('plugins.ban.json')
     def test_ban_cmd(self, mockjson, mockreq):
-        ban, testbot = plugin_testbot(plugins.ban.Ban, logging.ERROR)
+        ban, testbot = plugin_testbot(plugins.ban.Ban, 'Ban', logging.ERROR)
         ban.activate()
 
         ban.bot_config.ROOMS_TO_JOIN = ('coala/coala', 'coala/coala-bears')
@@ -34,7 +34,7 @@ class TestBan(unittest.TestCase):
     @patch('plugins.ban.requests')
     @patch('plugins.ban.json')
     def test_unban_cmd(self, mockjson, mockreq):
-        ban, testbot = plugin_testbot(plugins.ban.Ban, logging.ERROR)
+        ban, testbot = plugin_testbot(plugins.ban.Ban, 'Ban', logging.ERROR)
         ban.activate()
 
         ban.bot_config.ROOMS_TO_JOIN = ('coala/coala', 'coala/coala-bears')

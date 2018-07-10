@@ -47,7 +47,7 @@ class TestLabHub(unittest.TestCase):
             'coala developers': mock_team_developers
         }
 
-        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, logging.ERROR)
+        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, 'LabHub', logging.ERROR)
         labhub.activate()
         labhub._teams = teams
 
@@ -133,7 +133,7 @@ class TestLabHub(unittest.TestCase):
         plugins.labhub.GitLabPrivateToken = create_autospec(IGitt.GitLab.GitLabPrivateToken)
 
         labhub, testbot_private = plugin_testbot(
-            plugins.labhub.LabHub, logging.ERROR,
+            plugins.labhub.LabHub, 'LabHub', logging.ERROR,
             {'BACKEND': 'text', 'ACCESS_CONTROLS':{'create_issue_cmd' : {'allowprivate':False}}}
         )
         labhub.activate()
@@ -149,7 +149,7 @@ class TestLabHub(unittest.TestCase):
 
         # Creating issue in public chat
         labhub, testbot_public = plugin_testbot(
-            plugins.labhub.LabHub, logging.ERROR, {'BACKEND': 'text'}
+            plugins.labhub.LabHub, 'LabHub', logging.ERROR, {'BACKEND': 'text'}
         )
         labhub.activate()
         labhub.REPOS = {'repository': self.mock_repo,
@@ -182,7 +182,7 @@ class TestLabHub(unittest.TestCase):
     def test_unassign_cmd(self):
         plugins.labhub.GitHub = create_autospec(IGitt.GitHub.GitHub.GitHub)
         plugins.labhub.GitLab = create_autospec(IGitt.GitLab.GitLab.GitLab)
-        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, logging.ERROR)
+        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, 'LabHub', logging.ERROR)
 
         labhub.activate()
         labhub.REPOS = {'name': self.mock_repo}
@@ -211,7 +211,7 @@ class TestLabHub(unittest.TestCase):
     def test_assign_cmd(self):
         plugins.labhub.GitHub = create_autospec(IGitt.GitHub.GitHub.GitHub)
         plugins.labhub.GitLab = create_autospec(IGitt.GitLab.GitLab.GitLab)
-        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, logging.ERROR)
+        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, 'LabHub', logging.ERROR)
         labhub.activate()
 
         mock_issue = create_autospec(GitHubIssue)
@@ -322,7 +322,7 @@ class TestLabHub(unittest.TestCase):
                                   'not eligible to be assigned to this issue')
 
     def test_mark_cmd(self):
-        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, logging.ERROR)
+        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, 'LabHub', logging.ERROR)
         labhub.activate()
 
         labhub.REPOS = {'a': self.mock_repo}
@@ -376,7 +376,7 @@ class TestLabHub(unittest.TestCase):
                               'marked pending review')
 
     def test_alive(self):
-        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, logging.ERROR)
+        labhub, testbot = plugin_testbot(plugins.labhub.LabHub, 'LabHub', logging.ERROR)
         with patch('plugins.labhub.time.sleep') as mock_sleep:
             labhub.gh_repos = {
                 'coala': create_autospec(IGitt.GitHub.GitHub.GitHubRepository),
